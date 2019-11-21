@@ -9,6 +9,19 @@ import regex
 
 app = Flask(__name__)
 
+@app.route("/crimeData")
+def crimeData():
+    crimePage = requests.get("https://www.worldatlas.com/articles/most-dangerous-cities-in-canada.html")
+    crimeData = BeautifulSoup(crimePage.text, 'html.parser')
+    table = crimeData.find("table")
+    output_row = []
+    for table_row in table.findAll('tr'):
+        columns = table_row.findAll('td')
+        for column in columns:
+            output_row.append(column.text)
+    # Initialize a Crime Data JSON
+    return jsonify({'crimeData':output_row})
+
 @app.route("/flaskJobs/<query>/<location>")
 def jobDetails():
     """
