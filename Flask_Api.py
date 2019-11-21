@@ -7,11 +7,16 @@ import simplejson as json
 import regex
 app = Flask(__name__)
 
+
+
+#def crimeData():
+
+
 @app.route("/")
 def jobDetails():
     #Author Rajwinder
     # Collect and parse first page
-    page = requests.get('https://ca.indeed.com/software-jobs')
+    page = requests.get('https://ca.indeed.com/jobs?q=software&l=Windsor%2C+ON')
     crimePage = requests.get("https://www.worldatlas.com/articles/most-dangerous-cities-in-canada.html")
     crimeData = BeautifulSoup(crimePage.text, 'html.parser')
     table = crimeData.find("table")
@@ -23,10 +28,17 @@ def jobDetails():
         
         for column in columns:
             output_row.append(column.text)
-            print(column.text)
-            print("*****************")
+            #print(column.text)
+            
+            #print("*****************")
             #output_rows.append(output_row)
+
+    dangerousCity = False
+    if "Windsor" in output_row:
+        dangerousCity = True
+        print("in City")
     
+    print(dangerousCity)
     soup = BeautifulSoup(page.text, 'html.parser')
 
     #Author Rajwinder# Pull all text from the BodyText div
@@ -58,7 +70,9 @@ def jobDetails():
     x = False
     
     # Initialize a employee list JSON
-    return jsonify({'lng':lng,'lat':lat,'jobs':job_title,'url':'https://ca.indeed.com/'+job_link,'desc':job_desc,'address':job_location,'crimeData':output_row,'open':bool(x)})
+    return jsonify({'safeCity':dangerousCity,'lng':lng,'lat':lat,'jobs':job_title,'url':'https://ca.indeed.com/'+job_link,'desc':job_desc,'address':job_location,'crimeData':output_row,'open':bool(x)})
+
+
 
 if __name__ == '__main__':
      app.run(port=5002)

@@ -54,7 +54,12 @@ def get_data(query, num_pages, location):
             print(column.text)
             print("*****************")
             #output_rows.append(output_row)
+    dangerousCity = False
+    if location in output_row:
+        dangerousCity = True
+        print("in City")
     
+    print(dangerousCity)
     for page in range(1,3):
         page = (page-1) * 10  
         # get full url 
@@ -83,7 +88,7 @@ def get_data(query, num_pages, location):
             print("Success!")
             # Returns False as x is False 
             x = False
-            jobDetails = {'lng':lng,'lat':lat,'jobs':job_title,'url':'https://ca.indeed.com/'+job_link,'desc':job_desc,'address':job_location,'crimeData':output_row,'open':bool(x) }
+            jobDetails = {'safeCity':dangerous,'lng':lng,'lat':lat,'jobs':job_title,'url':'https://ca.indeed.com/'+job_link,'desc':job_desc,'address':job_location,'crimeData':output_row,'open':bool(x) }
             jobList.append(jobDetails)
             # convert to json data
             jsonStr = json.dumps(jobList)
