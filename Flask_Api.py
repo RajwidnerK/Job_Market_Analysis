@@ -13,18 +13,11 @@ def crimeData():
     crimePage = requests.get("https://www.worldatlas.com/articles/most-dangerous-cities-in-canada.html")
     crimeData = BeautifulSoup(crimePage.text, 'html.parser')
     table = crimeData.find("table")
-    
-    #output_rows = []
     output_row = []
     for table_row in table.findAll('tr'):
         columns = table_row.findAll('td')
-        
         for column in columns:
             output_row.append(column.text)
-            #print(column.text)
-            
-            #print("*****************")
-            #output_rows.append(output_row)
     # Initialize a employee list JSON
     return jsonify({'crimeData':output_row})
 
@@ -87,7 +80,7 @@ def jobDetails():
     x = False
     
     # Initialize a employee list JSON
-    return jsonify({'safeCity':dangerousCity,'lng':lng,'lat':lat,'jobs':job_title,'url':'https://ca.indeed.com/'+job_link,'desc':job_desc,'address':job_location,'crimeData':output_row,'open':bool(x)})
+    return jsonify({'safeCity':bool(dangerousCity),'lng':lng,'lat':lat,'jobs':job_title,'url':'https://ca.indeed.com/'+job_link,'desc':job_desc,'address':job_location,'crimeData':output_row,'open':bool(x)})
 
 
 
