@@ -22,7 +22,7 @@ def crimeData():
     return jsonify({'crimeData':output_row})
 
 
-@app.route("/")
+@app.route("/flaskJobs")
 def jobDetails():
     #Author Rajwinder
     # Collect and parse first page
@@ -80,7 +80,7 @@ def jobDetails():
     x = False
     
     # Initialize a employee list JSON
-    return jsonify({'safeCity':bool(dangerousCity),'lng':lng,'lat':lat,'jobs':job_title,'url':'https://ca.indeed.com/'+job_link,'desc':job_desc,'address':job_location,'crimeData':output_row,'open':bool(x)})
+    return jsonify({'safeCity':bool(dangerousCity),'lng':lng,'lat':lat,'jobs':job_title,'url':'https://ca.indeed.com/'+job_link,'desc':job_desc,'address':job_location,'open':bool(x)})
 
 
 

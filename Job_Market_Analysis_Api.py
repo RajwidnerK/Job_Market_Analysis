@@ -101,7 +101,7 @@ def get_data(query, num_pages, location):
             print("Success!")
             # Returns False as x is False 
             x = False
-            jobDetails = {'safeCity':bool(dangerousCity),'lng':lng,'lat':lat,'jobs':job_title,'url':'https://ca.indeed.com/'+job_link,'desc':job_desc,'address':job_location,'crimeData':output_row,'open':bool(x) }
+            jobDetails = {'safeCity':bool(dangerousCity),'lng':lng,'lat':lat,'jobs':job_title,'url':'https://ca.indeed.com/'+job_link,'desc':job_desc,'address':job_location,open':bool(x) }
             jobList.append(jobDetails)
             # convert to json data
             jsonStr = json.dumps(jobList)
