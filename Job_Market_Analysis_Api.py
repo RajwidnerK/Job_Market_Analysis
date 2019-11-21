@@ -23,14 +23,14 @@ def crimeData():
     return jsonify({'crimeData':output_row})
 
 @app.route("/flaskJobs/<query>/<location>")
-def jobDetails():
+def jobDetails(query,location):
     """
     Parameters:
         query: Indeed query keyword such as 'Data Scientist'
         num_pages: Number of search results needed
         location: location to search for
     Returns:
-        Json
+        Json of Job Data
     """
     # Convert the queried title to Indeed format
     query = '+'.join(query.lower().split())
